@@ -1274,15 +1274,24 @@
       const btnSaveSettings = document.getElementById('btn-save-settings');
       const settingsAcademicYear = document.getElementById('settings-academic-year');
 
+      let settingsCloseTimeout = null;
+
       function openSettingsDrawer(event) {
         if (event) event.preventDefault();
         closeMobileDrawer();
-        if (settingsDrawer) {
-          settingsDrawer.setAttribute('open', '');
-          settingsDrawer.classList.add('is-open');
+        if (settingsCloseTimeout) {
+          clearTimeout(settingsCloseTimeout);
+          settingsCloseTimeout = null;
         }
         if (settingsBackdrop) {
           settingsBackdrop.removeAttribute('hidden');
+          void settingsBackdrop.offsetWidth;
+          settingsBackdrop.classList.add('is-active');
+        }
+        if (settingsDrawer) {
+          settingsDrawer.setAttribute('open', '');
+          void settingsDrawer.offsetWidth;
+          settingsDrawer.classList.add('is-open');
         }
         if (btnOpenSettings) {
           btnOpenSettings.setAttribute('aria-expanded', 'true');
@@ -1292,14 +1301,25 @@
       function closeSettingsDrawer() {
         if (settingsDrawer) {
           settingsDrawer.classList.remove('is-open');
-          settingsDrawer.removeAttribute('open');
         }
         if (settingsBackdrop) {
-          settingsBackdrop.setAttribute('hidden', '');
+          settingsBackdrop.classList.remove('is-active');
         }
         if (btnOpenSettings) {
           btnOpenSettings.setAttribute('aria-expanded', 'false');
         }
+        if (settingsCloseTimeout) {
+          clearTimeout(settingsCloseTimeout);
+        }
+        settingsCloseTimeout = setTimeout(() => {
+          if (settingsDrawer && !settingsDrawer.classList.contains('is-open')) {
+            settingsDrawer.removeAttribute('open');
+          }
+          if (settingsBackdrop && !settingsBackdrop.classList.contains('is-active')) {
+            settingsBackdrop.setAttribute('hidden', '');
+          }
+          settingsCloseTimeout = null;
+        }, 340);
       }
 
       if (btnOpenSettings) {
@@ -1323,7 +1343,7 @@
       }
 
       document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && settingsDrawer && settingsDrawer.hasAttribute('open')) {
+        if (event.key === 'Escape' && settingsDrawer && (settingsDrawer.hasAttribute('open') || settingsDrawer.classList.contains('is-open'))) {
           closeSettingsDrawer();
         }
       });
