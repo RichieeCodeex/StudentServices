@@ -1,0 +1,14 @@
+================================================================================
+IT631 Lab 1: DSSC Unified Student Services Dashboard
+Exit Ticket Technical Responses
+Student: Richie C. Mula (ID: 2023-00482) | 3rd Year BSIT
+================================================================================
+
+1. Layout Architecture: Persistent Sidebar vs. Top Navigation
+A persistent sidebar shell provides predictable vertical real estate that effortlessly accommodates deep, multi-tiered institutional information architecture—such as enrollments, grade rosters, and faculty clearances—without causing horizontal crowding or multi-line header reflows. Furthermore, pinning navigation to the lateral axis preserves maximum vertical viewport height for complex, data-dense administrative tables and forms, thereby minimizing cognitive friction and unnecessary scroll overhead for users. This architectural separation between persistent global navigation and the transactional main canvas maintains a consistent user mental model across high-frequency administrative workflows.
+
+2. Responsive Tactics: Card Transformation & 360px Scalability
+To prevent horizontal page blowout and destructive truncation on a 360px viewport, the table strips traditional row/column grid semantics below 768px (`display: block`) and reconstructs each record as an isolated, self-contained visual card. Each cell is rendered as a flexbox row paired with a generated `::before` pseudo-element derived dynamically from HTML `data-label` attributes, transforming tabular cells into scannable key-value pairs. Combined with priority column pinning and an encompassing `overflow-x: auto` containment wrapper, this dual-safe tactic guarantees zero horizontal document overflow while preserving complete data fidelity on compact screens.
+
+3. Accessibility: WCAG 2.4.7 Focus Visible & Interactive State Compliance
+Stripping focus rings via `outline: none` completely eliminates visual feedback for keyboard-only and switch-access users, leaving them stranded without an active indicator of their DOM interaction point and causing a direct violation of WCAG 2.4.7 (Focus Visible). To achieve AA compliance, this implementation binds an uncompromising `:focus-visible` rule featuring an explicit 3px solid outline in Royal Blue (`#2563EB`) paired with a 2px `outline-offset` to prevent overlap with input borders. This delivers an exceptional contrast ratio exceeding 4.8:1 against both light surface cards and dark header containers, guaranteeing instantaneous visual orientation across all interactive states.

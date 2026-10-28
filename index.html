@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Davao del Sur State College (DSSC) Unified Student Services Dashboard. IT631 Lab 1 compliant semantic, accessible, and responsive student portal.">
+  <title>DSSC Unified Student Services Dashboard | IT631 Lab 1</title>
+  <!-- Institutional Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="dashboard-shell">
+
+  <!-- Accessible Skip Navigation Link (WCAG 2.4.1) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ========================================================================
+       LANDMARK 1: Application Header (<header>)
+       Semantic banner landmark containing branding, user actions, and wireframe modal trigger
+       ======================================================================== -->
+  <header class="app-header">
+    <div class="header-brand">
+      <button type="button" class="header-collapse-btn" aria-label="Toggle Navigation Menu" aria-expanded="false" title="Toggle Sidebar">
+        <!-- Hamburger Icon (Default on Mobile / Collapsed on Desktop) -->
+        <svg class="collapse-icon-menu" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <!-- Close X Icon (Default Expanded on Desktop) -->
+        <svg class="collapse-icon-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="brand-crest" aria-hidden="true">
+        <img src="DSSC%20Logo.png" alt="DSSC Official Seal" class="crest-logo-img">
+      </div>
+      <div class="brand-text">
+        <h1>DSSC Unified Student Services</h1>
+        <span class="brand-subtext" id="active-view-breadcrumb">Davao del Sur State College • Student Portal</span>
+      </div>
+    </div>
+
+    <div class="header-user-actions">
+      <!-- Phase 1: Built-in Low-Fi Wireframe View Toggle Button -->
+      <button type="button" id="btn-wireframe-toggle" class="btn btn-outline btn-sm" aria-haspopup="dialog"
+        aria-controls="wireframe-modal">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="3" y1="9" x2="21" y2="9"></line>
+          <line x1="9" y1="21" x2="9" y2="9"></line>
+        </svg>
+        <span>View Low-Fi Wireframe (Phase 1)</span>
+      </button>
+
+      <!-- Action Icon Buttons matching Portal Topbar Design -->
+      <div class="header-icon-cluster" role="group" aria-label="Portal Quick Tools">
+        <button type="button" class="icon-action-btn" data-switch-view="view-requests"
+          aria-label="Pending Service Requests Notification" title="View Recent Requests">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+          <span class="notification-dot" id="header-pending-badge" aria-hidden="true">2</span>
+        </button>
+
+        <button type="button" id="btn-theme-toggle" class="icon-action-btn icon-action-sun"
+          aria-label="Switch to Dark Mode" aria-pressed="false" title="Toggle Dark / Light Mode">
+          <!-- Sun Icon (Shown in Light Mode) -->
+          <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <!-- Moon Icon (Shown in Dark Mode) -->
+          <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button type="button" id="btn-open-settings" class="icon-action-btn"
+          aria-label="Open System Settings" aria-haspopup="dialog" aria-expanded="false" title="System Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+            </path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       LANDMARK 2: Persistent Navigation (<nav>)
+       Each button switches to its own dedicated UI view
+       ======================================================================== -->
+  <nav class="app-sidebar" aria-label="Student Services Menu">
+    <div class="sidebar-top-group">
+      <!-- Sidebar Top Brand Header -->
+      <div class="sidebar-brand">
+        <div class="sidebar-crest" aria-hidden="true">
+          <img src="DSSC%20Logo.png" alt="DSSC Official Seal" class="crest-logo-img">
+        </div>
+        <div class="sidebar-brand-info" aria-hidden="true">
+          <span class="sidebar-brand-title">StudentServices</span>
+          <span class="sidebar-brand-sub">DSSC Unified Portal</span>
+        </div>
+        <button type="button" class="sidebar-mobile-close-btn" id="btn-mobile-drawer-close" aria-label="Close Navigation Drawer" title="Close Menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <ul class="nav-list" role="list">
+        <li class="nav-item">
+          <a href="#view-dashboard" data-view="view-dashboard" class="nav-link active" aria-current="page" title="Dashboard Overview">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+              <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+              <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+              <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+            </svg>
+            <span>Dashboard Overview</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#view-requests" data-view="view-requests" class="nav-link" title="Recent Requests">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            <span>Recent Requests</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#view-form" data-view="view-form" class="nav-link" title="Submit Request">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+            <span>Submit Request</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#view-clearance" data-view="view-clearance" class="nav-link" title="Clearance Status">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            <span>Clearance Status</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#view-records" data-view="view-records" class="nav-link" title="Academic Records">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+            </svg>
+            <span>Academic Records</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="sidebar-bottom-group">
+      <!-- Sidebar Institutional Context Card -->
+      <div class="sidebar-institutional-card" aria-hidden="true">
+        <h4>Institutional Term</h4>
+        <p>1st Semester AY 2026-2027</p>
+        <p class="sidebar-term-deadline">Registrar Window Closes: Nov 15, 2026</p>
+      </div>
+
+      <!-- Flexbox Component: Student Profile Badge -->
+      <div class="user-profile-badge" role="group" aria-label="Authenticated Student Profile" title="Richie C. Mula • 3rd Year BSIT">
+        <div class="profile-avatar" aria-hidden="true">RM</div>
+        <div class="profile-info">
+          <span class="profile-name">Richie C. Mula</span>
+          <span class="profile-meta">3rd Year BSIT • Student</span>
+        </div>
+      </div>
+
+      <!-- Sidebar Utility Links -->
+      <div class="sidebar-footer-actions">
+        <a href="#system-settings" id="btn-sidebar-settings" class="sidebar-utility-link" title="System Settings">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+            </path>
+          </svg>
+          <span>Settings</span>
+        </a>
+        <a href="#view-signout" data-view="view-signout" class="sidebar-utility-link link-signout" title="End Portal Session">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span>End Portal Session</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========================================================================
+       LANDMARK 3: Main Content Canvas (<main>)
+       Strict Visual & DOM <section> Hierarchy inside <main>:
+         1. Top <section id="view-dashboard">: Summary Metrics (Primary Task)
+         2. Middle <section id="view-requests">: Recent Requests Table (Secondary Task)
+         3. Bottom <section id="view-form">: Submit Service Request Form (Utility/Form Section)
+       Clicking any sidebar navigation button smoothly scrolls down to its section
+       within the unified Dashboard canvas without separating into isolated screens.
+       ======================================================================== -->
+  <main id="main-content" class="app-main">
+
+    <!-- ======================================================================
+         HIERARCHY 1 (TOP <section>): SUMMARY METRICS — PRIMARY TASK
+         Dashboard Overview (Hero Banner + 3 Metric Summary Cards + Term Overview)
+         ====================================================================== -->
+    <section id="view-dashboard" class="portal-view active-view" aria-labelledby="metrics-heading">
+
+      <!-- Hero Banner: Institutional Student Profile & Active Standing Highlight -->
+      <div class="hero-portal-banner" role="region" aria-label="Student Institutional Profile Banner">
+        <div class="hero-watermark-seal" aria-hidden="true">
+          <img src="DSSC%20Logo.png" alt="" class="hero-watermark-img">
+        </div>
+
+        <div class="hero-left-content">
+          <div class="hero-badge-row">
+            <div class="hero-crest-box" aria-hidden="true">
+              <img src="DSSC%20Logo.png" alt="DSSC Official Seal" class="crest-logo-img">
+            </div>
+            <span class="hero-pill-tag">UNIFIED E-PORTAL</span>
+            <span class="hero-ay-text">1st Semester AY 2026-2027</span>
+          </div>
+
+          <h2 class="hero-student-name">Richie C. Mula</h2>
+          <p class="hero-student-details">
+            3rd Year BSIT | DSSC | Student ID: <span class="hero-id-highlight">2023-00482</span> (Registrar Window
+            Closes: Nov 15, 2026)
+          </p>
+        </div>
+
+        <div class="hero-glass-card">
+          <div class="hero-glass-metrics">
+            <span class="hero-glass-label">ACTIVE ENROLLED LOAD</span>
+            <div class="hero-glass-value">21.0</div>
+            <span class="hero-glass-sub">Regular Full-Time</span>
+          </div>
+          <button type="button" class="hero-glass-btn" data-switch-view="view-requests">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            <span>View Requests</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Primary Task: Summary Metrics Grid -->
+      <div id="section-metrics" class="dashboard-section section-transparent">
+        <div class="portal-bar-header">
+          <div class="portal-bar-title-group">
+            <h2 id="metrics-heading">Academic &amp; Service Summary</h2>
+            <span class="live-status-pill">• Primary Task (Top Hierarchy)</span>
+          </div>
+          <div class="portal-bar-controls">
+            <span class="section-subtitle-inline">Real-time enrollment and administrative clearance standing</span>
+            <button type="button" class="carousel-nav-btn" data-switch-view="view-records"
+              aria-label="Open Academic Records View" title="Academic Records">‹</button>
+            <button type="button" class="carousel-nav-btn" data-switch-view="view-requests"
+              aria-label="Open Recent Requests View" title="Recent Requests">›</button>
+          </div>
+        </div>
+
+        <!-- CSS Grid Metric Area using mandatory baseline snippet -->
+        <div class="metric-grid">
+          <!-- Metric Card 1: Active Units -->
+          <article id="academic-records-card" class="metric-card card-units card-featured-accent"
+            aria-labelledby="metric-units-title">
+            <div class="metric-top">
+              <div class="metric-title-stack">
+                <span class="metric-title" id="metric-units-title">Active Units</span>
+                <div class="metric-value">21.0 Units</div>
+              </div>
+              <div class="doc-illustration" aria-hidden="true">
+                <span class="doc-badge badge-dot-emerald">✓</span>
+                <span class="doc-line doc-line-lg"></span>
+                <span class="doc-line doc-line-sm"></span>
+              </div>
+            </div>
+            <p class="metric-caption">
+              <span class="badge badge-approved">Enrolled</span>
+              <span>Regular Full-Time Standing in 1st Semester AY 2026-2027.</span>
+            </p>
+            <div class="metric-card-footer">
+              <button type="button" class="btn-card-action" data-switch-view="view-records">View Records</button>
+            </div>
+          </article>
+
+          <!-- Metric Card 2: Pending Requests (Dynamically Incremented) -->
+          <article id="pending-requests-card" class="metric-card card-pending" aria-labelledby="metric-pending-title">
+            <div class="metric-top">
+              <div class="metric-title-stack">
+                <span class="metric-title" id="metric-pending-title">Pending Requests</span>
+                <div class="metric-value"><span id="metric-pending-count">2</span> Requests</div>
+              </div>
+              <div class="doc-illustration" aria-hidden="true">
+                <span class="doc-badge badge-dot-amber">⏳</span>
+                <span class="doc-line doc-line-lg"></span>
+                <span class="doc-line doc-line-sm"></span>
+              </div>
+            </div>
+            <p class="metric-caption">
+              <span class="badge badge-pending">Active</span>
+              <span>Awaiting Registrar Action and official credential processing.</span>
+            </p>
+            <div class="metric-card-footer">
+              <button type="button" class="btn-card-action" data-switch-view="view-requests">Track Requests</button>
+            </div>
+          </article>
+
+          <!-- Metric Card 3: Clearance Deficiencies -->
+          <article id="clearance-card" class="metric-card card-deficiency" aria-labelledby="metric-deficiency-title">
+            <div class="metric-top">
+              <div class="metric-title-stack">
+                <span class="metric-title" id="metric-deficiency-title">Clearance Deficiencies</span>
+                <div class="metric-value">1 Deficiency</div>
+              </div>
+              <div class="doc-illustration" aria-hidden="true">
+                <span class="doc-badge badge-dot-crimson">!</span>
+                <span class="doc-line doc-line-lg"></span>
+                <span class="doc-line doc-line-sm"></span>
+              </div>
+            </div>
+            <p class="metric-caption">
+              <span class="badge badge-rejected">Hold</span>
+              <span>Library / Computer Lab Clearance sign-off required.</span>
+            </p>
+            <div class="metric-card-footer">
+              <button type="button" class="btn-card-action" data-switch-view="view-clearance">Inspect Hold</button>
+            </div>
+          </article>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ======================================================================
+         HIERARCHY 2 (MIDDLE <section>): RECENT SERVICE REQUESTS TABLE — SECONDARY TASK
+         Tabular Data Grid + Mobile Card Transformation
+         ====================================================================== -->
+    <section id="view-requests" class="portal-view active-view" aria-labelledby="requests-heading">
+      <div id="section-requests" class="dashboard-section">
+        <div class="section-header">
+          <div class="section-header-left">
+            <div class="section-icon-box" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+            </div>
+            <div>
+              <div class="section-title-cluster">
+                <h2 id="requests-heading">Recent Service Requests</h2>
+                <span class="term-active-pill">SECONDARY TASK (MIDDLE)</span>
+              </div>
+              <p class="section-subtitle">Secondary Task • History of submitted documentation and clearance applications
+              </p>
+            </div>
+          </div>
+          <div class="section-header-right">
+            <span class="candidate-outline-pill">⚡ Registrar Queue: Live</span>
+          </div>
+        </div>
+
+        <div class="table-container" tabindex="0" role="region"
+          aria-label="Recent Requests Data Table (scrollable on mobile if needed)">
+          <table class="responsive-table">
+            <thead>
+              <tr>
+                <th scope="col">Request ID</th>
+                <th scope="col">Service Type</th>
+                <th scope="col">Date Filed</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody id="requests-table-body">
+              <tr>
+                <td data-label="Request ID" class="request-id-cell">REQ-2026-0891</td>
+                <td data-label="Service Type">Document Requisition</td>
+                <td data-label="Date Filed">2026-10-24</td>
+                <td data-label="Status"><span class="badge badge-pending">Pending</span></td>
+              </tr>
+              <tr>
+                <td data-label="Request ID" class="request-id-cell">REQ-2026-0842</td>
+                <td data-label="Service Type">Subject Overload Permit</td>
+                <td data-label="Date Filed">2026-10-20</td>
+                <td data-label="Status"><span class="badge badge-approved">Approved</span></td>
+              </tr>
+              <tr>
+                <td data-label="Request ID" class="request-id-cell">REQ-2026-0798</td>
+                <td data-label="Service Type">Clearance Override</td>
+                <td data-label="Date Filed">2026-10-15</td>
+                <td data-label="Status"><span class="badge badge-rejected">Rejected</span></td>
+              </tr>
+              <tr>
+                <td data-label="Request ID" class="request-id-cell">REQ-2026-0765</td>
+                <td data-label="Service Type">Transcript of Records (TOR)</td>
+                <td data-label="Date Filed">2026-10-12</td>
+                <td data-label="Status"><span class="badge badge-pending">Pending</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         HIERARCHY 3 (BOTTOM <section>): SUBMIT SERVICE REQUEST FORM — UTILITY SECTION
+         WCAG 2.1 AA Validated Service Request Form
+         ====================================================================== -->
+    <section id="view-form" class="portal-view active-view" aria-labelledby="form-heading">
+      <!-- Accessible Confirmation Banner inside Submit Request Form View -->
+      <div id="confirmation-banner" class="alert alert-success" role="status" aria-live="polite" hidden style="margin-bottom: 1.25rem;">
+        <div class="alert-icon" aria-hidden="true">✓</div>
+        <div class="alert-content">
+          <div class="alert-title">Request Submitted Successfully!</div>
+          <p id="confirmation-text">Your service transaction has been filed and queued for Registrar processing.</p>
+        </div>
+        <button type="button" class="btn btn-outline btn-sm" data-switch-view="view-requests" style="margin-left: auto;">
+          <span>View in Recent Requests →</span>
+        </button>
+      </div>
+
+      <div id="section-form" class="dashboard-section">
+        <div class="section-header">
+          <div class="section-header-left">
+            <div class="section-icon-box" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="section-title-cluster">
+                <h2 id="form-heading">Submit Service Request</h2>
+                <span class="term-active-pill">E-REQUISITION</span>
+              </div>
+              <p class="section-subtitle">Utility Section • File new credentials requisition, permits, or clearance
+                petitions</p>
+            </div>
+          </div>
+          <div class="section-header-right">
+            <span class="candidate-outline-pill">📋 WCAG 2.1 AA Validated</span>
+          </div>
+        </div>
+
+        <form id="service-request-form" novalidate>
+          <div class="form-grid">
+
+            <!-- Field 1: Service Category (<select>) -->
+            <div class="form-group">
+              <label for="service-category" class="form-label">
+                <span>Service Category</span>
+                <span class="required-indicator" aria-hidden="true">*</span>
+              </label>
+              <select id="service-category" name="service_category" class="form-select" required aria-required="true"
+                aria-describedby="service-category-help service-category-error">
+                <option value="">-- Select Service Category --</option>
+                <option value="Document Requisition">Document Requisition (Certificate of Grades / Enrollment)</option>
+                <option value="Subject Overload Permit">Subject Overload Permit (Dean's Approval Required)</option>
+                <option value="Transcript of Records (TOR)">Transcript of Records (TOR - Official Copy)</option>
+                <option value="Clearance Override">Clearance Override (Department Sign-off)</option>
+              </select>
+              <small id="service-category-help" class="helper-text">Select the official DSSC institutional credential or
+                academic permit required.</small>
+              <p class="error-msg" id="service-category-error" role="alert" aria-live="polite"></p>
+            </div>
+
+            <!-- Field 2: Urgency / Semester Term (<select>) -->
+            <div class="form-group">
+              <label for="request-term" class="form-label">
+                <span>Urgency &amp; Semester Term</span>
+                <span class="required-indicator" aria-hidden="true">*</span>
+              </label>
+              <select id="request-term" name="request_term" class="form-select" required aria-required="true"
+                aria-describedby="request-term-help request-term-error">
+                <option value="">-- Select Academic Term &amp; Urgency Tier --</option>
+                <option value="1st Sem AY 2026-2027 (Standard Processing)">1st Sem AY 2026-2027 (Standard 3-5 Working
+                  Days)</option>
+                <option value="1st Sem AY 2026-2027 (Urgent - Graduating)">1st Sem AY 2026-2027 (Priority - Graduating
+                  Candidate)</option>
+                <option value="Mid-Year Term 2026 (Priority)">Mid-Year Term 2026 (Expedited Clearance)</option>
+                <option value="2nd Sem AY 2025-2026 (Archive)">2nd Sem AY 2025-2026 (Archival Record Retrieval)</option>
+              </select>
+              <small id="request-term-help" class="helper-text">Specify the relevant enrollment period and processing
+                urgency category.</small>
+              <p class="error-msg" id="request-term-error" role="alert" aria-live="polite"></p>
+            </div>
+
+            <!-- Field 3: Reason / Request Details (<textarea>) -->
+            <div class="form-group form-group-full">
+              <label for="request-reason" class="form-label">
+                <span>Reason / Request Details</span>
+                <span class="required-indicator" aria-hidden="true">*</span>
+              </label>
+              <textarea id="request-reason" name="request_reason" class="form-textarea" rows="4"
+                placeholder="Detail your academic rationale, target employer/scholarship, or justification (minimum 15 characters)..."
+                required aria-required="true" aria-describedby="request-reason-help request-reason-error"></textarea>
+              <small id="request-reason-help" class="helper-text">Provide complete academic justification. Minimum 15
+                characters required for validation.</small>
+              <p class="error-msg" id="request-reason-error" role="alert" aria-live="polite"></p>
+            </div>
+
+          </div>
+
+          <!-- Form Actions & Grading Interactive Disabled-State Toggle -->
+          <div class="form-actions-wrapper">
+            <div class="button-cluster">
+              <button type="submit" id="submit-request-btn" class="btn btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+                <span>Submit Service Request</span>
+              </button>
+              <button type="reset" id="reset-request-btn" class="btn btn-secondary">
+                <span>Reset Form</span>
+              </button>
+            </div>
+
+            <!-- Checkbox to easily preview :disabled button state during grading -->
+            <div class="grading-toggle-box">
+              <input type="checkbox" id="toggle-disabled-state" aria-controls="submit-request-btn">
+              <label for="toggle-disabled-state">Preview :disabled State (Grading Helper)</label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       LANDMARK 4: Institutional Footer (<footer>)
+       Semantic contentinfo landmark
+       ======================================================================== -->
+  <footer class="app-footer">
+    <div class="footer-content">
+      <div>
+        <p><strong>© 2026 Davao del Sur State College (DSSC)</strong> • Unified Student Services Portal</p>
+        <p>Office of the Registrar &amp; Student Admission • Matti, Digos City, Davao del Sur</p>
+      </div>
+      <div>
+        <span class="footer-compliance-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span>IT631 Lab 1 • WCAG 2.1 AA Compliant</span>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       PHASE 1: Built-in Low-Fidelity Wireframe Modal (for wireframe.png)
+       Accessible <dialog> displaying side-by-side Mobile & Desktop Wireframe Schematics
+       ======================================================================== -->
+  <dialog id="wireframe-modal" class="wireframe-modal" aria-labelledby="wireframe-modal-title">
+    <div class="wireframe-header">
+      <h3 id="wireframe-modal-title">Phase 1: Low-Fidelity Architectural Wireframe (IT631 Submission)</h3>
+      <button type="button" id="btn-close-wireframe" class="btn btn-outline-light btn-sm"
+        aria-label="Close wireframe preview modal">✕ Close</button>
+    </div>
+
+    <div class="wireframe-body">
+      <div class="wireframe-instructions">
+        <span>📸 <strong>Instructor/Grading Tip:</strong> Open the standalone wireframe page, download <code>wireframe.pdf</code>, or screenshot this dialog for <code>wireframe.png</code>.</span>
+        <div class="button-cluster">
+          <a href="../Low%20Fedility/wireframe.html" target="_blank" class="btn btn-primary btn-sm">↗ Open Standalone Wireframe Page</a>
+          <a href="../Low%20Fedility/wireframe.pdf" target="_blank" class="btn btn-secondary btn-sm">📄 Open wireframe.pdf</a>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="window.print()">🖨️ Print</button>
+        </div>
+      </div>
+
+      <div class="wireframe-comparison-grid">
+
+        <!-- Mobile Wireframe Schematic (360px - 400px Viewport) -->
+        <div class="wireframe-frame">
+          <div class="wireframe-viewport-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              aria-hidden="true">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+              <line x1="12" y1="18" x2="12.01" y2="18"></line>
+            </svg>
+            <span>Mobile Viewport (360px – 400px)</span>
+          </div>
+
+          <!-- Shell Landmark: Header -->
+          <div class="lofi-box lofi-header" style="text-align: left;">
+            <strong>LAYOUT SHELL: &lt;header&gt; TOPBAR</strong><br>
+            [☰ Drawer Toggle] + [DSSC Seal &amp; Title] + [🔔 2] [☀] [⚙]
+          </div>
+
+          <!-- Shell Landmark: Slide-Over Navigation Drawer -->
+          <div class="lofi-box lofi-nav" style="text-align: left;">
+            <strong>LAYOUT SHELL: &lt;nav&gt; SLIDE-OVER DRAWER</strong><br>
+            • [DSSC Seal] StudentServices + [✕ Close]<br>
+            • Active Pill: [┃ Dashboard Overview]<br>
+            • Recent Requests / Submit Request / Clearance / Records<br>
+            • Bottom Profile Badge: [RM] Richie C. Mula (Student)
+          </div>
+
+          <!-- Shell Landmark: Main Content Canvas -->
+          <div style="display:flex; flex-direction:column; gap:0.5rem; padding: 0.35rem 0;">
+            <!-- Hierarchy 1: Primary Task -->
+            <div class="lofi-box lofi-primary">
+              <strong>HIERARCHY 1: PRIMARY TASK (TOP &lt;section&gt;)</strong><br>
+              [Hero Banner: Richie C. Mula • 21.0 Active Load]<br>
+              Metric Summary Grid (1-Column Stack)<br>
+              <div class="lofi-subgrid" style="grid-template-columns: 1fr;">
+                <div class="lofi-subbox">[Card 1: Active Units - 21.0 Units (Blue Border)]</div>
+                <div class="lofi-subbox">[Card 2: Pending Requests - 2 Requests (Gold Border)]</div>
+                <div class="lofi-subbox">[Card 3: Deficiencies - 1 Deficiency (Maroon Border)]</div>
+              </div>
+            </div>
+
+            <!-- Hierarchy 2: Secondary Task -->
+            <div class="lofi-box lofi-secondary">
+              <strong>HIERARCHY 2: SECONDARY TASK (MIDDLE &lt;section&gt;)</strong><br>
+              Recent Requests Table (Responsive Stacked Cards)<br>
+              <div
+                style="font-size:0.68rem; margin-top:0.25rem; font-weight:normal; text-align:left; background:#fff; padding:0.35rem; border:1px dashed #10B981;">
+                • Card 1: ID | Type | Date | Status Badge<br>
+                • Card 2: Key-value rows transformed via ::before data-label
+              </div>
+            </div>
+
+            <!-- Hierarchy 3: Utility / Form Section -->
+            <div class="lofi-box lofi-utility">
+              <strong>HIERARCHY 3: UTILITY / FORM SECTION (BOTTOM &lt;section&gt;)</strong><br>
+              Submit Service Request Panel<br>
+              <div
+                style="font-size:0.68rem; margin-top:0.25rem; font-weight:normal; text-align:left; background:#fff; padding:0.35rem; border:1px dashed #EC4899;">
+                [Select: Service Category + Helper + Error]<br>
+                [Select: Urgency / Term + Helper + Error]<br>
+                [Textarea: Request Details (Min 15 chars)]<br>
+                [Submit Button] + [Grading Disabled State Checkbox]
+              </div>
+            </div>
+          </div>
+
+          <!-- Shell Landmark: Footer -->
+          <div class="lofi-box lofi-footer">
+            <strong>LAYOUT SHELL: &lt;footer&gt;</strong><br>
+            Institutional Copyright &amp; WCAG Compliance Info
+          </div>
+        </div>
+
+        <!-- Desktop Wireframe Schematic (1024px+ Viewport) -->
+        <div class="wireframe-frame">
+          <div class="wireframe-viewport-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              aria-hidden="true">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+            <span>Desktop Viewport (1024px+ Persistent Sidebar Grid)</span>
+          </div>
+
+          <div class="lofi-desktop-diagram">
+            <!-- Left Persistent Sidebar Navigation Shell -->
+            <div class="lofi-box lofi-nav">
+              <strong>LAYOUT SHELL:<br>&lt;nav&gt; PERSISTENT SIDEBAR</strong><br>
+              <span style="font-size:0.7rem; font-weight:normal; color:#4338CA;">
+                (260px Expanded / 64px Rail)<br><br>
+                • [┃ Dashboard Overview]<br>
+                • Recent Requests<br>
+                • Submit Request<br>
+                • Clearance Status<br>
+                • Academic Records<br><br>
+                [Term Context Card]<br>
+                [Profile: Richie C. Mula]
+              </span>
+            </div>
+
+            <!-- Top Header Profile Shell -->
+            <div class="lofi-box lofi-header"
+              style="text-align:left; display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <strong>LAYOUT SHELL: &lt;header&gt; TOPBAR</strong><br>
+                [✕ Collapse Rail] + [DSSC Seal] DSSC Unified Student Services
+              </div>
+              <div
+                style="font-size:0.7rem; background:#fff; padding:0.25rem 0.5rem; border-radius:4px; border:1px solid #94A3B8;">
+                [View Low-Fi Wireframe (Phase 1)] + [🔔 2] [☀] [⚙]
+              </div>
+            </div>
+
+            <!-- Main Canvas Hierarchy -->
+            <div class="lofi-canvas">
+              <!-- Primary Task: Summary Metrics Grid (3-column) -->
+              <div class="lofi-box lofi-primary">
+                <strong>HIERARCHY 1: PRIMARY TASK (TOP &lt;section&gt;) — HERO BANNER + CSS GRID 3-COLUMN METRICS</strong>
+                <div style="font-size:0.68rem; background:#DBEAFE; border:1px dashed #1E40AF; padding:0.3rem 0.5rem; border-radius:4px; margin-top:0.3rem; text-align:left; color:#1E3A8A;">
+                  <strong>[HERO BANNER: UNIFIED E-PORTAL]</strong> Richie C. Mula • 3rd Year BSIT | ID: 2023-00482 &nbsp;—&nbsp; [Active Load: 21.0 Units]
+                </div>
+                <div class="lofi-subgrid">
+                  <div class="lofi-subbox">[Active Units: 21.0 Units]</div>
+                  <div class="lofi-subbox">[Pending Requests: 2 Requests]</div>
+                  <div class="lofi-subbox">[Clearance Deficiencies: 1]</div>
+                </div>
+              </div>
+
+              <!-- Secondary Task: Tabular Data Grid -->
+              <div class="lofi-box lofi-secondary" style="text-align:left;">
+                <strong>HIERARCHY 2: SECONDARY TASK (MIDDLE &lt;section&gt;) — 4-COLUMN TABULAR GRID</strong>
+                <div
+                  style="font-size:0.7rem; font-weight:normal; margin-top:0.3rem; background:#fff; padding:0.4rem; border:1px solid #10B981;">
+                  Columns: [Request ID] | [Service Type] | [Date Filed] | [Status Badge]<br>
+                  • REQ-2026-0891 | Document Requisition | 2026-10-24 | [Pending]<br>
+                  • REQ-2026-0842 | Subject Overload Permit | 2026-10-20 | [Approved]
+                </div>
+              </div>
+
+              <!-- Utility Section: Interactive Request Form -->
+              <div class="lofi-box lofi-utility" style="text-align:left;">
+                <strong>HIERARCHY 3: UTILITY SECTION (BOTTOM &lt;section&gt;) — ACCESSIBLE REQUEST FORM</strong>
+                <div
+                  style="font-size:0.7rem; font-weight:normal; margin-top:0.3rem; background:#fff; padding:0.4rem; border:1px solid #EC4899;">
+                  Grid Inputs: Service Category + Urgency Term + Justification (min 15 chars)<br>
+                  Accessibility: Explicit &lt;label&gt;, aria-describedby, &lt;p role="alert"&gt;, :focus-visible
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom Shell Footer -->
+            <div class="lofi-box lofi-footer" style="grid-column: 2; font-size:0.7rem;">
+              <strong>LAYOUT SHELL: &lt;footer&gt;</strong> — © 2026 Davao del Sur State College • WCAG 2.1 AA Compliant
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ========================================================================
+       SYSTEM SETTINGS: Right-Side Slide-Over Drawer
+       Includes Student Profile & Info, Dark Mode / Light Mode, Academic Year,
+       Notifications, and Security & Activity
+       ======================================================================== -->
+  <div id="settings-backdrop" class="settings-backdrop" hidden aria-hidden="true"></div>
+  <dialog id="system-settings-drawer" class="settings-drawer" aria-labelledby="settings-drawer-title">
+    <div class="settings-drawer-header">
+      <div class="settings-drawer-title-group">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+          </path>
+        </svg>
+        <h3 id="settings-drawer-title">System Settings</h3>
+      </div>
+      <button type="button" id="btn-close-settings" class="settings-close-btn" aria-label="Close System Settings">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="settings-drawer-body">
+      <!-- 1. STUDENT PROFILE & STUDENT INFO -->
+      <div class="settings-group">
+        <div class="settings-group-label label-blue">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span>STUDENT PROFILE &amp; INFORMATION</span>
+        </div>
+
+        <div class="settings-card">
+          <div class="settings-profile-top">
+            <div class="settings-profile-avatar" aria-hidden="true">RM</div>
+            <div class="settings-profile-Identity">
+              <strong class="settings-student-name">Richie C. Mula</strong>
+              <span class="settings-student-sub">3rd Year BSIT | 2023-00482</span>
+              <span class="settings-student-email">richie.mula@dssc.edu.ph</span>
+            </div>
+          </div>
+
+          <div class="settings-student-info-list">
+            <div class="student-info-row">
+              <span class="info-label">Program &amp; Year</span>
+              <span class="info-value">BS Information Technology • 3rd Year</span>
+            </div>
+            <div class="student-info-row">
+              <span class="info-label">College / Institute</span>
+              <span class="info-value">DSSC — ICET Department</span>
+            </div>
+            <div class="student-info-row">
+              <span class="info-label">Academic Standing</span>
+              <span class="info-value info-badge-pill">Regular Full-Time (21.0 Units)</span>
+            </div>
+            <div class="student-info-row">
+              <span class="info-label">Course Instructor</span>
+              <span class="info-value">Sir Montoya (IT631)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. APPEARANCE & THEME (LIGHT MODE / DARK MODE) -->
+      <div class="settings-group">
+        <div class="settings-group-label label-amber">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <span>APPEARANCE &amp; THEME</span>
+        </div>
+
+        <div class="settings-card">
+          <div class="settings-theme-segmented" role="group" aria-label="Select Interface Theme">
+            <button type="button" id="btn-theme-light" class="theme-segment-btn active">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+              <span>Light Mode</span>
+            </button>
+            <button type="button" id="btn-theme-dark" class="theme-segment-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+              <span>Dark Mode</span>
+            </button>
+          </div>
+
+          <div class="settings-toggle-row" style="margin-top: 0.85rem; padding-top: 0.75rem; border-top: 1px solid var(--color-border);">
+            <div class="settings-toggle-info">
+              <strong>Dark Mode Appearance</strong>
+              <span>Reduce eye strain with high-contrast dark slate surfaces</span>
+            </div>
+            <label class="ios-switch" for="settings-dark-mode-switch">
+              <input type="checkbox" id="settings-dark-mode-switch" aria-label="Toggle Dark Mode Appearance">
+              <span class="ios-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. ACADEMIC YEAR -->
+      <div class="settings-group">
+        <div class="settings-group-label label-amber">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>ACADEMIC YEAR</span>
+        </div>
+
+        <div class="settings-card">
+          <label for="settings-academic-year" class="settings-field-label">Current Academic Year</label>
+          <select id="settings-academic-year" class="settings-select">
+            <option value="AY 2026-2027 (Current)" selected>AY 2026-2027 (Current)</option>
+            <option value="AY 2025-2026 • 2nd Semester">AY 2025-2026 • 2nd Semester</option>
+            <option value="AY 2025-2026 • 1st Semester">AY 2025-2026 • 1st Semester</option>
+          </select>
+          <p class="settings-field-caption">Controls which records are shown on the Dashboard.</p>
+        </div>
+      </div>
+
+      <!-- 4. NOTIFICATIONS -->
+      <div class="settings-group">
+        <div class="settings-group-label label-blue">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+          <span>NOTIFICATIONS</span>
+        </div>
+
+        <div class="settings-card settings-toggle-list">
+          <div class="settings-toggle-row">
+            <div class="settings-toggle-info">
+              <strong>Email Alerts</strong>
+              <span>Registrar &amp; clearance notices via email</span>
+            </div>
+            <label class="ios-switch" for="settings-email-alerts">
+              <input type="checkbox" id="settings-email-alerts" checked aria-label="Email Alerts">
+              <span class="ios-slider"></span>
+            </label>
+          </div>
+
+          <div class="settings-toggle-row">
+            <div class="settings-toggle-info">
+              <strong>System Notifications</strong>
+              <span>In-dashboard banner alerts</span>
+            </div>
+            <label class="ios-switch" for="settings-system-notifs">
+              <input type="checkbox" id="settings-system-notifs" checked aria-label="System Notifications">
+              <span class="ios-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. SECURITY & ACTIVITY -->
+      <div class="settings-group">
+        <div class="settings-group-label label-blue">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span>SECURITY &amp; ACTIVITY</span>
+        </div>
+
+        <div class="settings-card">
+          <div class="settings-security-box">
+            <strong>Review account security</strong>
+            <span>Active Session: DSSC Unified Student Portal • Verified Today</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-drawer-footer">
+      <button type="button" id="btn-cancel-settings" class="settings-btn-cancel">Cancel</button>
+      <button type="button" id="btn-save-settings" class="settings-btn-save">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+        <span>Save Settings</span>
+      </button>
+    </div>
+  </dialog>
+
+  <!-- ========================================================================
+       PHASE 3 & 4: Embedded Vanilla JavaScript Logic
+       - Dedicated SPA View Switcher for Sidebar & Action Buttons
+       - Dark Mode / Light Mode Theme Controller
+       - Interactive Form Validation with ARIA Binding & First-Error Focus Shift
+       - Dynamic Table Row Insertion with data-label attributes
+       - Metric Counter Real-Time Increment
+       - Grading Simulator for :disabled Button State
+       - Low-Fi Wireframe Modal Accessible Dialog Controller
+       ======================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // DOM Elements: Form & Controls
+      const form = document.getElementById('service-request-form');
+      const serviceCategory = document.getElementById('service-category');
+      const requestTerm = document.getElementById('request-term');
+      const requestReason = document.getElementById('request-reason');
+      const submitBtn = document.getElementById('submit-request-btn');
+      const disabledToggle = document.getElementById('toggle-disabled-state');
+
+      // DOM Elements: Errors
+      const categoryError = document.getElementById('service-category-error');
+      const termError = document.getElementById('request-term-error');
+      const reasonError = document.getElementById('request-reason-error');
+
+      // DOM Elements: Table & Metrics
+      const tableBody = document.getElementById('requests-table-body');
+      const pendingCountElem = document.getElementById('metric-pending-count');
+      const headerPendingBadge = document.getElementById('header-pending-badge');
+      const requestsTotalCount = document.getElementById('requests-total-count');
+      const requestsPendingPill = document.getElementById('requests-pending-pill');
+      const dashboardLatestReq = document.getElementById('dashboard-latest-req');
+      const confirmationBanner = document.getElementById('confirmation-banner');
+      const confirmationText = document.getElementById('confirmation-text');
+
+      // DOM Elements: Wireframe Modal & Theme Toggle
+      const wireframeModal = document.getElementById('wireframe-modal');
+      const btnOpenWireframe = document.getElementById('btn-wireframe-toggle');
+      const btnCloseWireframe = document.getElementById('btn-close-wireframe');
+      const btnThemeToggle = document.getElementById('btn-theme-toggle');
+      const btnCollapseSidebar = document.querySelector('.header-collapse-btn');
+      const btnMobileDrawerClose = document.getElementById('btn-mobile-drawer-close');
+
+      // DOM Elements: Multi-View Switching
+      const sidebarNavButtons = document.querySelectorAll('.app-sidebar [data-view]');
+      const portalViews = document.querySelectorAll('.portal-view');
+      const viewBreadcrumb = document.getElementById('active-view-breadcrumb');
+
+      const VIEW_LABELS = {
+        'view-dashboard': 'Davao del Sur State College • Dashboard Overview',
+        'view-requests': 'Davao del Sur State College • Recent Service Requests',
+        'view-form': 'Davao del Sur State College • Submit Service Request',
+        'view-clearance': 'Davao del Sur State College • Institutional Clearance Status',
+        'view-records': 'Davao del Sur State College • Academic Records (21.0 Units)',
+        'view-preferences': 'Davao del Sur State College • Service Preferences',
+        'view-signout': 'Davao del Sur State College • Portal Session'
+      };
+
+      function closeMobileDrawer() {
+        document.body.classList.remove('mobile-nav-open');
+        if (btnCollapseSidebar && window.innerWidth < 1024) {
+          btnCollapseSidebar.setAttribute('aria-expanded', 'false');
+        }
+      }
+
+      if (btnCollapseSidebar) {
+        btnCollapseSidebar.addEventListener('click', () => {
+          if (window.innerWidth < 1024) {
+            const isOpen = document.body.classList.toggle('mobile-nav-open');
+            btnCollapseSidebar.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          } else {
+            const isCollapsed = document.body.classList.toggle('sidebar-collapsed');
+            btnCollapseSidebar.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+          }
+        });
+      }
+
+      if (btnMobileDrawerClose) {
+        btnMobileDrawerClose.addEventListener('click', closeMobileDrawer);
+      }
+
+      // Close mobile drawer if tapping on the dark backdrop outside .app-sidebar
+      document.addEventListener('click', (event) => {
+        if (window.innerWidth < 1024 && document.body.classList.contains('mobile-nav-open')) {
+          const sidebarEl = document.querySelector('.app-sidebar');
+          if (
+            sidebarEl &&
+            !sidebarEl.contains(event.target) &&
+            btnCollapseSidebar &&
+            !btnCollapseSidebar.contains(event.target)
+          ) {
+            closeMobileDrawer();
+          }
+        }
+      });
+
+      // ----------------------------------------------------------------------
+      // Feature 0A: Sidebar Smooth-Scroll Navigator (Unified Dashboard View)
+      // Clicking any sidebar or action button smoothly scrolls to the target
+      // section inside the Dashboard Overview without separating or hiding views.
+      // ----------------------------------------------------------------------
+      const SCROLL_TARGETS = {
+        'view-dashboard': () => document.getElementById('view-dashboard'),
+        'view-requests': () => document.getElementById('view-requests'),
+        'view-form': () => document.getElementById('view-form'),
+        'view-clearance': () => document.getElementById('clearance-card'),
+        'view-records': () => document.getElementById('academic-records-card'),
+        'view-preferences': () => document.getElementById('view-form'),
+        'view-signout': () => document.querySelector('.app-footer')
+      };
+
+      function switchPortalView(targetViewId) {
+        // Keep all 3 core Dashboard sections visible at all times
+        portalViews.forEach((view) => {
+          view.removeAttribute('hidden');
+          view.classList.add('active-view');
+        });
+
+        // Update active state color on sidebar buttons
+        sidebarNavButtons.forEach((btn) => {
+          if (btn.getAttribute('data-view') === targetViewId) {
+            btn.classList.add('active');
+            btn.setAttribute('aria-current', 'page');
+          } else {
+            btn.classList.remove('active');
+            btn.removeAttribute('aria-current');
+          }
+        });
+
+        // Update topbar subtitle breadcrumb
+        if (viewBreadcrumb && VIEW_LABELS[targetViewId]) {
+          viewBreadcrumb.textContent = VIEW_LABELS[targetViewId];
+        }
+
+        // Smooth scroll to the target section/element on the Dashboard
+        if (targetViewId === 'view-dashboard') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          const getTarget = SCROLL_TARGETS[targetViewId];
+          const targetEl = getTarget ? getTarget() : document.getElementById(targetViewId);
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      }
+
+      // Sidebar button click listeners
+      sidebarNavButtons.forEach((btn) => {
+        btn.addEventListener('click', (event) => {
+          event.preventDefault();
+          const targetView = btn.getAttribute('data-view');
+          if (targetView) {
+            if (confirmationBanner) confirmationBanner.setAttribute('hidden', '');
+            closeMobileDrawer();
+            switchPortalView(targetView);
+          }
+        });
+      });
+
+      // Internal action buttons that switch views (e.g., Card buttons, Back buttons, Topbar icons)
+      document.querySelectorAll('[data-switch-view]').forEach((trigger) => {
+        trigger.addEventListener('click', (event) => {
+          event.preventDefault();
+          const targetView = trigger.getAttribute('data-switch-view');
+          if (targetView) {
+            switchPortalView(targetView);
+          }
+        });
+      });
+
+      // Quick prefill buttons (e.g., "File Clearance Override" or "Request Official TOR")
+      document.querySelectorAll('[data-prefill-category]').forEach((trigger) => {
+        trigger.addEventListener('click', (event) => {
+          event.preventDefault();
+          const categoryVal = trigger.getAttribute('data-prefill-category');
+          switchPortalView('view-form');
+          if (serviceCategory && categoryVal) {
+            serviceCategory.value = categoryVal;
+            serviceCategory.focus();
+          }
+        });
+      });
+
+      // ----------------------------------------------------------------------
+      // Feature 0B: Dark Mode / Light Mode Theme Controller + Settings Sync
+      // ----------------------------------------------------------------------
+      const THEME_STORAGE_KEY = 'dssc-portal-theme';
+      const btnThemeLight = document.getElementById('btn-theme-light');
+      const btnThemeDark = document.getElementById('btn-theme-dark');
+      const settingsDarkSwitch = document.getElementById('settings-dark-mode-switch');
+
+      function saveAndApplyTheme(theme) {
+        applyTheme(theme);
+        try {
+          localStorage.setItem(THEME_STORAGE_KEY, theme);
+        } catch (err) {
+          // Ignore storage errors
+        }
+      }
+
+      function applyTheme(theme) {
+        const isDark = theme === 'dark';
+        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        document.body.classList.toggle('dark-mode', isDark);
+
+        if (btnThemeToggle) {
+          btnThemeToggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+          btnThemeToggle.setAttribute(
+            'aria-label',
+            isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'
+          );
+          btnThemeToggle.setAttribute(
+            'title',
+            isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'
+          );
+        }
+
+        if (btnThemeLight && btnThemeDark) {
+          btnThemeLight.classList.toggle('active', !isDark);
+          btnThemeDark.classList.toggle('active', isDark);
+        }
+
+        if (settingsDarkSwitch) {
+          settingsDarkSwitch.checked = isDark;
+        }
+      }
+
+      try {
+        const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+        if (savedTheme === 'dark' || savedTheme === 'light') {
+          applyTheme(savedTheme);
+        } else {
+          applyTheme('light');
+        }
+      } catch (err) {
+        applyTheme('light');
+      }
+
+      if (btnThemeToggle) {
+        btnThemeToggle.addEventListener('click', () => {
+          const currentTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+          const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
+          saveAndApplyTheme(nextTheme);
+        });
+      }
+
+      if (btnThemeLight) {
+        btnThemeLight.addEventListener('click', () => saveAndApplyTheme('light'));
+      }
+
+      if (btnThemeDark) {
+        btnThemeDark.addEventListener('click', () => saveAndApplyTheme('dark'));
+      }
+
+      if (settingsDarkSwitch) {
+        settingsDarkSwitch.addEventListener('change', (e) => {
+          saveAndApplyTheme(e.target.checked ? 'dark' : 'light');
+        });
+      }
+
+      // ----------------------------------------------------------------------
+      // Feature 0C: System Settings Right-Side Slide-Over Drawer Controller
+      // ----------------------------------------------------------------------
+      const settingsDrawer = document.getElementById('system-settings-drawer');
+      const settingsBackdrop = document.getElementById('settings-backdrop');
+      const btnOpenSettings = document.getElementById('btn-open-settings');
+      const btnSidebarSettings = document.getElementById('btn-sidebar-settings');
+      const btnCloseSettings = document.getElementById('btn-close-settings');
+      const btnCancelSettings = document.getElementById('btn-cancel-settings');
+      const btnSaveSettings = document.getElementById('btn-save-settings');
+      const settingsAcademicYear = document.getElementById('settings-academic-year');
+
+      function openSettingsDrawer(event) {
+        if (event) event.preventDefault();
+        closeMobileDrawer();
+        if (settingsDrawer) {
+          settingsDrawer.setAttribute('open', '');
+          settingsDrawer.classList.add('is-open');
+        }
+        if (settingsBackdrop) {
+          settingsBackdrop.removeAttribute('hidden');
+        }
+        if (btnOpenSettings) {
+          btnOpenSettings.setAttribute('aria-expanded', 'true');
+        }
+      }
+
+      function closeSettingsDrawer() {
+        if (settingsDrawer) {
+          settingsDrawer.classList.remove('is-open');
+          settingsDrawer.removeAttribute('open');
+        }
+        if (settingsBackdrop) {
+          settingsBackdrop.setAttribute('hidden', '');
+        }
+        if (btnOpenSettings) {
+          btnOpenSettings.setAttribute('aria-expanded', 'false');
+        }
+      }
+
+      if (btnOpenSettings) {
+        btnOpenSettings.addEventListener('click', openSettingsDrawer);
+      }
+
+      if (btnSidebarSettings) {
+        btnSidebarSettings.addEventListener('click', openSettingsDrawer);
+      }
+
+      if (btnCloseSettings) {
+        btnCloseSettings.addEventListener('click', closeSettingsDrawer);
+      }
+
+      if (btnCancelSettings) {
+        btnCancelSettings.addEventListener('click', closeSettingsDrawer);
+      }
+
+      if (settingsBackdrop) {
+        settingsBackdrop.addEventListener('click', closeSettingsDrawer);
+      }
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && settingsDrawer && settingsDrawer.hasAttribute('open')) {
+          closeSettingsDrawer();
+        }
+      });
+
+      if (btnSaveSettings) {
+        btnSaveSettings.addEventListener('click', () => {
+          const selectedYear = settingsAcademicYear ? settingsAcademicYear.value : 'AY 2026-2027 (Current)';
+          const activeThemeLabel = document.documentElement.getAttribute('data-theme') === 'dark' ? 'Dark Mode' : 'Light Mode';
+          if (confirmationBanner && confirmationText) {
+            confirmationText.textContent = `System Settings saved for Richie C. Mula • Academic Term: ${selectedYear} • Appearance: ${activeThemeLabel}.`;
+            confirmationBanner.removeAttribute('hidden');
+          }
+          closeSettingsDrawer();
+        });
+      }
+
+      // ----------------------------------------------------------------------
+      // Feature 1: Wireframe Modal Controller
+      // ----------------------------------------------------------------------
+      if (btnOpenWireframe && wireframeModal) {
+        btnOpenWireframe.addEventListener('click', () => {
+          if (typeof wireframeModal.showModal === 'function') {
+            wireframeModal.showModal();
+          } else {
+            wireframeModal.setAttribute('open', '');
+          }
+        });
+      }
+
+      if (btnCloseWireframe && wireframeModal) {
+        btnCloseWireframe.addEventListener('click', () => {
+          if (typeof wireframeModal.close === 'function') {
+            wireframeModal.close();
+          } else {
+            wireframeModal.removeAttribute('open');
+          }
+        });
+      }
+
+      wireframeModal.addEventListener('click', (event) => {
+        const rect = wireframeModal.getBoundingClientRect();
+        const isInDialog = (
+          rect.top <= event.clientY &&
+          event.clientY <= rect.top + rect.height &&
+          rect.left <= event.clientX &&
+          event.clientX <= rect.left + rect.width
+        );
+        if (!isInDialog) {
+          wireframeModal.close();
+        }
+      });
+
+      // ----------------------------------------------------------------------
+      // Feature 2: Disabled State Simulator Toggle (Grading Helper)
+      // ----------------------------------------------------------------------
+      if (disabledToggle && submitBtn) {
+        disabledToggle.addEventListener('change', (e) => {
+          submitBtn.disabled = e.target.checked;
+          if (e.target.checked) {
+            submitBtn.setAttribute('title', 'Button is disabled via grading preview toggle.');
+          } else {
+            submitBtn.removeAttribute('title');
+          }
+        });
+      }
+
+      // ----------------------------------------------------------------------
+      // Feature 3: Accessible Client-Side Validation & Submission
+      // ----------------------------------------------------------------------
+      function clearErrors() {
+        [serviceCategory, requestTerm, requestReason].forEach(input => {
+          input.removeAttribute('aria-invalid');
+        });
+        categoryError.textContent = '';
+        termError.textContent = '';
+        reasonError.textContent = '';
+      }
+
+      serviceCategory.addEventListener('change', () => {
+        if (serviceCategory.value.trim() !== '') {
+          serviceCategory.removeAttribute('aria-invalid');
+          categoryError.textContent = '';
+        }
+      });
+
+      requestTerm.addEventListener('change', () => {
+        if (requestTerm.value.trim() !== '') {
+          requestTerm.removeAttribute('aria-invalid');
+          termError.textContent = '';
+        }
+      });
+
+      requestReason.addEventListener('input', () => {
+        if (requestReason.value.trim().length >= 15) {
+          requestReason.removeAttribute('aria-invalid');
+          reasonError.textContent = '';
+        }
+      });
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        clearErrors();
+
+        let isValid = true;
+        let firstInvalidElement = null;
+
+        // Validation 1: Service Category
+        if (!serviceCategory.value || serviceCategory.value.trim() === '') {
+          isValid = false;
+          serviceCategory.setAttribute('aria-invalid', 'true');
+          categoryError.textContent = 'Please select an institutional service category.';
+          if (!firstInvalidElement) firstInvalidElement = serviceCategory;
+        }
+
+        // Validation 2: Urgency / Semester Term
+        if (!requestTerm.value || requestTerm.value.trim() === '') {
+          isValid = false;
+          requestTerm.setAttribute('aria-invalid', 'true');
+          termError.textContent = 'Please specify the applicable academic term and urgency tier.';
+          if (!firstInvalidElement) firstInvalidElement = requestTerm;
+        }
+
+        // Validation 3: Reason / Request Details (Must be at least 15 characters)
+        const trimmedReason = requestReason.value.trim();
+        if (trimmedReason.length < 15) {
+          isValid = false;
+          requestReason.setAttribute('aria-invalid', 'true');
+          if (trimmedReason.length === 0) {
+            reasonError.textContent = 'Reason cannot be empty. Please provide at least 15 characters of academic details.';
+          } else {
+            reasonError.textContent = `Reason is too brief (${trimmedReason.length}/15 characters). Please provide more academic details.`;
+          }
+          if (!firstInvalidElement) firstInvalidElement = requestReason;
+        }
+
+        // If validation fails: shift focus to first invalid control (WCAG 3.3.1 & 3.3.3)
+        if (!isValid) {
+          if (firstInvalidElement) {
+            firstInvalidElement.focus();
+          }
+          return;
+        }
+
+        // --------------------------------------------------------------------
+        // Feature 4: Dynamic Table Row Insertion & Metric Update
+        // --------------------------------------------------------------------
+        const randomNum = Math.floor(1000 + Math.random() * 9000);
+        const newRequestId = `REQ-2026-${randomNum}`;
+
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        const formattedDate = `${yyyy}-${mm}-${dd}`;
+
+        const selectedCategory = serviceCategory.options[serviceCategory.selectedIndex].text.split('(')[0].trim();
+
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+          <td data-label="Request ID" class="request-id-cell">${newRequestId}</td>
+          <td data-label="Service Type">${selectedCategory}</td>
+          <td data-label="Date Filed">${formattedDate}</td>
+          <td data-label="Status"><span class="badge badge-pending">Pending</span></td>
+        `;
+
+        tableBody.insertBefore(newRow, tableBody.firstChild);
+
+        // Increment Pending Requests metric counter & module counters
+        if (pendingCountElem) {
+          const currentCount = parseInt(pendingCountElem.textContent, 10) || 0;
+          const nextCount = (currentCount + 1).toString();
+          pendingCountElem.textContent = nextCount;
+          if (headerPendingBadge) headerPendingBadge.textContent = nextCount;
+          if (requestsPendingPill) requestsPendingPill.textContent = nextCount;
+        }
+
+        if (requestsTotalCount) {
+          const currentTotal = parseInt(requestsTotalCount.textContent, 10) || 4;
+          requestsTotalCount.textContent = (currentTotal + 1).toString();
+        }
+
+        if (dashboardLatestReq) {
+          dashboardLatestReq.textContent = `${newRequestId} • ${selectedCategory}`;
+        }
+
+        // Display accessible confirmation banner
+        if (confirmationBanner && confirmationText) {
+          confirmationText.textContent = `Transaction ${newRequestId} (${selectedCategory}) has been registered and forwarded to the Registrar. Status: Pending.`;
+          confirmationBanner.removeAttribute('hidden');
+          confirmationBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        form.reset();
+      });
+    });
+  </script>
+</body>
+
+</html>
