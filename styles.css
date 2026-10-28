@@ -1977,6 +1977,63 @@ body.sidebar-collapsed .app-sidebar .nav-link {
 }
 
 /* --------------------------------------------------------------------------
+   Mobile View Typography: Justified Text Alignment (<= 768px)
+   Enforces text-align: justify across all narrative and descriptive text
+   elements in mobile viewports (paragraphs, hero details, section subtitles,
+   metric card captions, form helpers, error messages, and footer text)
+   for clean edge-to-edge structural alignment.
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  p,
+  .hero-student-details,
+  .section-subtitle,
+  .section-subtitle-inline,
+  .helper-text,
+  .error-msg,
+  .alert p,
+  .alert-content p,
+  .footer-content,
+  .footer-content p,
+  .sidebar-institutional-card p,
+  .settings-card p,
+  .settings-field-caption,
+  .settings-toggle-info span,
+  .settings-security-box span,
+  .wireframe-instructions span,
+  .text-justify-mobile {
+    text-align: justify;
+    text-justify: inter-word;
+    text-align-last: left;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
+  .metric-caption {
+    display: block;
+    text-align: justify;
+    text-justify: inter-word;
+    text-align-last: left;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
+  .metric-caption .badge {
+    display: inline-flex;
+    vertical-align: middle;
+    margin-right: 0.35rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .metric-caption span:not(.badge) {
+    display: inline;
+  }
+
+  .helper-text {
+    display: block;
+  }
+}
+
+/* --------------------------------------------------------------------------
    Accessible Form Controls & Interactive Feedback
    -------------------------------------------------------------------------- */
 .form-grid {
@@ -2166,7 +2223,9 @@ body.sidebar-collapsed .app-sidebar .nav-link {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
-  text-align: center;
+  text-align: justify;
+  text-justify: inter-word;
+  text-align-last: left;
 }
 
 .footer-content strong {
